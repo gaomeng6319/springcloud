@@ -1,0 +1,23 @@
+server:
+  #服务端口号
+  port: 8013
+spring:
+  application:
+    # 服务名称 - 服务之间使用名称进行通讯
+    name: pes-service-02
+eureka:
+  client:
+    service-url:
+      # 填写注册中心服务器地址
+      defaultZone: http://127.0.0.1:7012/eureka
+    # 是否需要将自己注册到注册中心
+    register-with-eureka: true
+    # 是否需要搜索服务信息
+    fetch-registry: true
+  instance:
+    # 使用ip地址注册到注册中心
+    prefer-ip-address: true
+    # 注册中心列表中显示的状态参数
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #点击status 列 跳转到的界面，这里配置跳转到swagger文档首页，如果这个配置另有用途可以开发一个系统首页，点击首页进去在放跳转到swagger，跳转到其他页面的按钮
+    status-page-url: http://localhost:${server.port}/swagger-ui.html
